@@ -80,15 +80,17 @@
         </div>
 
     </div>
-    <script src="/lib/layui-v2.5.4/layui.js?v=1.0.4" charset="utf-8"></script>
-    <script src="/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js?190902"></script>
+    <script src="/lib/layui-v2.5.4/layui.js?v=1.0.5" charset="utf-8"></script>
+    <script src="/js/lay-config.js?v=1.0.5" charset="utf-8"></script>
+    <script src="/js_zhou/ajaxHelper.js"></script>
     <script>
         layui.use(['element', 'layer', 'layuimini'], function () {
             var $ = layui.jquery,
                 element = layui.element,
                 layer = layui.layer;
 
-            layuimini.init('api/init.json');
+            layuimini.init('api/init.json?1');
 
             $('.login-out').on("click", function () {
                 layer.msg('退出登录成功', function () {
