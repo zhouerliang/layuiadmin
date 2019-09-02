@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zhou.Services", "zhou.Servi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zhou.Models", "zhou.Models\zhou.Models.csproj", "{06C4674F-5DFC-4940-8ACE-AE3C5AC043FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zhou.Common", "Common\zhou.Common.csproj", "{21D1715C-8E4A-4CD4-AEEE-6650C71D80BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{21D1715C-8E4A-4CD4-AEEE-6650C71D80BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
