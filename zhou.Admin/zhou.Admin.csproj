@@ -18,4 +18,11 @@
     <Folder Include="Areas\Code\Views\" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\zhou.Models\zhou.Models.csproj" />
+    <ProjectReference Include="..\zhou.Services\zhou.Services.csproj" />
+  </ItemGroup>
+
 </Project>
