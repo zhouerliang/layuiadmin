@@ -48,19 +48,23 @@ namespace Common.Code
         {
             // Declare the widthValue field.
             CodeMemberField widthValueField = new CodeMemberField();
-            widthValueField.Attributes = MemberAttributes.Private;
+            widthValueField.Attributes = MemberAttributes.Public;
             widthValueField.Name = "widthValue";
             widthValueField.Type = new CodeTypeReference(typeof(double));
             widthValueField.Comments.Add(new CodeCommentStatement("The width of the object."));
+
             targetClass.Members.Add(widthValueField);
 
             // Declare the heightValue field
             CodeMemberField heightValueField = new CodeMemberField();
-            heightValueField.Attributes = MemberAttributes.Private;
+            heightValueField.Attributes = MemberAttributes.Public;
             heightValueField.Name = "heightValue";
             heightValueField.Type = new CodeTypeReference(typeof(double));
             heightValueField.Comments.Add(new CodeCommentStatement("The height of the object."));
             targetClass.Members.Add(heightValueField);
+
+
+            CodeSnippetTypeMember field = new CodeSnippetTypeMember("public string abc {get;set;}");
         }
         /// <summary>
         /// Add three properties to the class.
@@ -105,6 +109,22 @@ namespace Common.Code
                     new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), "heightValue"));
             areaProperty.GetStatements.Add(new CodeMethodReturnStatement(areaExpression));
             targetClass.Members.Add(areaProperty);
+
+            //CodeMemberProperty property1 = new CodeMemberProperty();
+            //property1.Name = "StringProperty";
+            //property1.Type = new CodeTypeReference("System.String");
+            //property1.Attributes = MemberAttributes.Public;
+            //areaProperty.Type = new CodeTypeReference(typeof(double));
+            //property1.HasGet = true;
+            //property1.HasSet = true;
+
+            ////property1.GetStatements.Add();
+            ////property1.SetStatements.Add(new CodeMethodReturnStatement());
+
+
+            //targetClass.Members.Add(property1);
+
+
         }
 
         /// <summary>
@@ -167,36 +187,7 @@ namespace Common.Code
             targetClass.Members.Add(constructor);
         }
 
-        /// <summary>
-        /// Add an entry point to the class.
-        /// </summary>
-        public void AddEntryPoint()
-        {
-            CodeEntryPointMethod start = new CodeEntryPointMethod();
-            CodeObjectCreateExpression objectCreate =
-                new CodeObjectCreateExpression(
-                new CodeTypeReference("CodeDOMCreatedClass"),
-                new CodePrimitiveExpression(5.3),
-                new CodePrimitiveExpression(6.9));
 
-            // Add the statement:
-            // "CodeDOMCreatedClass testClass = 
-            //     new CodeDOMCreatedClass(5.3, 6.9);"
-            start.Statements.Add(new CodeVariableDeclarationStatement(
-                new CodeTypeReference("CodeDOMCreatedClass"), "testClass", objectCreate));
-
-            // Creat the expression:
-            // "testClass.ToString()"
-            CodeMethodInvokeExpression toStringInvoke =
-                new CodeMethodInvokeExpression(
-                new CodeVariableReferenceExpression("testClass"), "ToString");
-
-            // Add a System.Console.WriteLine statement with the previous 
-            // expression as a parameter.
-            start.Statements.Add(new CodeMethodInvokeExpression(
-                new CodeTypeReferenceExpression("System.Console"), "WriteLine", toStringInvoke));
-            targetClass.Members.Add(start);
-        }
         /// <summary>
         /// Generate CSharp source code from the compile unit.
         /// </summary>
@@ -222,8 +213,7 @@ namespace Common.Code
             sample.AddProperties();
             sample.AddMethod();
             sample.AddConstructor();
-            sample.AddEntryPoint();
-            sample.GenerateCSharpCode(outputFileName);
+            sample.GenerateCSharpCode($"SampleCode{DateTime.Now.ToString("HHmmss")}.cs");
         }
     }
 }

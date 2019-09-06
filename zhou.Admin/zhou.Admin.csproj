@@ -16,6 +16,7 @@
   <ItemGroup>
     <Folder Include="Areas\Code\Controllers\" />
     <Folder Include="Areas\Code\Views\" />
+    <Folder Include="AppCode\" />
   </ItemGroup>
 
 
