@@ -17,12 +17,12 @@ namespace zhou.Admin.Controllers
     public class ConfigController : Controller
     {
         private readonly IHostingEnvironment _hostingEnvironment;
-        private readonly IArticleRepository _Article;
+        //private readonly IArticleRepository _Article;, IArticleRepository Article_Article = Article;
 
-        public ConfigController(IHostingEnvironment hostingEnvironment, IArticleRepository Article)
+        public ConfigController(IHostingEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;
-            _Article = Article;
+
         }
 
         [HttpPost]
@@ -62,6 +62,7 @@ namespace zhou.Admin.Controllers
             //定义类型 类，接口，枚举等
             CodeTypeDeclaration class1 = new CodeTypeDeclaration($"User{DateTime.Now.ToString("HHmmss")}");
             class1.IsClass = true;
+            class1.BaseTypes.Add("BaseEntity");//在这里声明继承关系 (基类 , 接口)
             samples.Types.Add(class1);
 
             //声明空的构造函数
@@ -97,20 +98,24 @@ namespace zhou.Admin.Controllers
         {
             string c = _hostingEnvironment.ContentRootPath;
 
-            return Json(new { c });
+            return Json(new
+            {
+                c,
+                b = c.Substring(0, c.LastIndexOf("\\"))
+            });
         }
 
         [HttpPost]
         public IActionResult AddArticle()
         {
-            int id = _Article.Add(new Article()
-            {
-                A_Title = "这是标题",
-                A_Content = "这是内容",
-                A_Author = 1
-            });
+            //int id = _Article.Add(new Article()
+            //{
+            //    A_Title = "这是标题",
+            //    A_Content = "这是内容",
+            //    A_Author = 1
+            //});
 
-            return Json(new { id });
+            return Json(new { id = 1 });
         }
     }
 }

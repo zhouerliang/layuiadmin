@@ -1,0 +1,55 @@
+﻿<div class="layuimini-container">
+    <div class="layuimini-main">
+        <blockquote class="layui-elem-quote layui-text">
+            生成代码
+        </blockquote>
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">单行选择框</label>
+                <div class="layui-input-inline">
+                    <select name="tableName">
+                        <option value=""></option>
+                        <option value="0">写作</option>
+                        <option value="1">阅读</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">表名</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="TableName" class="layui-input" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="btnSend" lay-filter="btnSend">立即提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    layui.use(['form'], function () {
+        var form = layui.form;
+
+        var active = {
+            GetTable: function () {
+                ajaxHelper.post("/Code/Code/GetTable", null, function (obj) { console.log(obj); });
+            },
+            SendCode: function (data) {
+                ajaxHelper.post("/Code/Code/CodeHelper", null, function (obj) { console.log(obj); });
+            }
+        };
+
+        active.GetTable();
+
+        //监听提交
+        form.on('submit(btnSend)', function (data) {
+
+            active.SendCode(data);
+
+            return false;
+        });
+
+    });
+</script>

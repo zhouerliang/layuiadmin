@@ -73,9 +73,8 @@ namespace zhou.Admin
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute("Default1", "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute("Default2", "{area=Code}/{controller=Home}/{action=Index}/{id?}");
             });
         }
 
