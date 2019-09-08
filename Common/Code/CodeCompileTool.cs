@@ -24,7 +24,7 @@ namespace Common.Code
             CreateModel(Table);
             CreateServer(Table);
             CreateServerImpl(Table);
-        }
+        } 
 
         //创建Model
         private void CreateModel(Table Table)
