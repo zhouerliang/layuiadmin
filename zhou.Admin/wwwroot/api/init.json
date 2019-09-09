@@ -44,6 +44,12 @@
           "target": "_self"
         },
         {
+          "title": "编辑文章",
+          "href": "page/Article/Edit.html",
+          "icon": "fa fa-window-maximize",
+          "target": "_self"
+        },
+        {
           "title": "测试页面",
           "href": "page/test/test.html",
           "icon": "fa fa-window-maximize",

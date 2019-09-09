@@ -24,13 +24,14 @@ namespace Common.Code
             CreateModel(Table);
             CreateServer(Table);
             CreateServerImpl(Table);
-        } 
+        }
 
         //创建Model
         private void CreateModel(Table Table)
         {
             CodeCompileUnit compileUnit = new CodeCompileUnit();
             CodeNamespace samples = new CodeNamespace(Table.Model.LibraryName + "." + Table.Model.FilePath);
+            samples.Imports.Add(new CodeNamespaceImport("System"));
             compileUnit.Namespaces.Add(samples);
 
             //定义类型 类，接口，枚举等

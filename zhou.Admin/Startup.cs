@@ -10,6 +10,7 @@ using Newtonsoft.Json.Serialization;
 using System.Linq;
 using System.Reflection;
 using zhou.Services;
+using zhou.Services.Adapters;
 
 namespace zhou.Admin
 {
@@ -26,9 +27,13 @@ namespace zhou.Admin
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            //Session支持
+            //Session会话支持
             services.AddSingleton<SessionHelper, SessionHelper>();
             services.AddSession();
+
+            //缓存实现方式注入
+            services.AddSingleton<ICache, MemoryCache>();
+            services.AddMemoryCache();
 
             //工作单元注入[注意生命周期用scoped]
             services.AddScoped<IUnitOfWork, UnitOfWork>();

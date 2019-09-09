@@ -5,9 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using zhou.Admin.AppCode;
-using zhou.Models.DBModels;
 
-namespace zhou.Admin.Areas.Code.Controllers
+namespace zhou.Admin.Controllers
 {
     public class CodeController : Controller
     {
@@ -19,35 +18,20 @@ namespace zhou.Admin.Areas.Code.Controllers
         }
 
         [HttpPost]
-        public IActionResult GetTable()
-        {
-            List<ColumnInfo> columns = new List<ColumnInfo>();
-            columns.Add(new ColumnInfo() { colName = "Menu", colRemark = "菜单表" });
-            columns.Add(new ColumnInfo() { colName = "User", colRemark = "用户表" });
-            columns.Add(new ColumnInfo() { colName = "Config", colRemark = "配置表" });
-
-            return ApiHelper.ReturnJson(columns);
-        }
-
-        [HttpPost]
         public IActionResult CodeHelper()
         {
             string Path = _hostingEnvironment.ContentRootPath;
             Path = Path.Substring(0, Path.LastIndexOf("\\"));
 
+            //拼装数据库表
             List<TableColumn> cols = new List<TableColumn>();
-            cols.Add(new TableColumn()
-            {
-                ColName = "MenuName",
-                ColType = typeof(string),
-                ColRemark = "菜单名称"
-            });
-            cols.Add(new TableColumn()
-            {
-                ColName = "Sort",
-                ColType = typeof(int),
-                ColRemark = "排序"
-            });
+            cols.Add(new TableColumn("ParentID", ColType.nvarcher, "父级菜单ID"));
+            cols.Add(new TableColumn("Title", ColType.nvarcher, "菜单名称"));
+            cols.Add(new TableColumn("Name", ColType.nvarcher, "菜单Name,通常为视图文件名或者视图所在文件夹名"));
+            cols.Add(new TableColumn("Jump", ColType.nvarcher, "菜单地址"));
+            cols.Add(new TableColumn("Icon", ColType.nvarcher, "菜单图标Icon"));
+            cols.Add(new TableColumn("Spread", ColType.@int, "是否默认展开：1=true，2=false"));
+            cols.Add(new TableColumn("Sort", ColType.@int, "排序"));
 
             Table table = new Table()
             {
@@ -56,7 +40,7 @@ namespace zhou.Admin.Areas.Code.Controllers
                 Server = new Project() { LibraryName = "zhou.Services", FilePath = "Repository" },
                 ServerImpl = new Project() { LibraryName = "zhou.Services", FilePath = "RepositoryImpl" },
                 Ctrl = new Project() { LibraryName = "zhou.Admin", FilePath = "Controllers" },
-                ClassName = "Menu" + DateTime.Now.ToString("HHmmss"),
+                ClassName = "Menu",
                 Columns = cols,
             };
 

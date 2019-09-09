@@ -14,14 +14,14 @@
 
 
   <ItemGroup>
-    <Folder Include="Areas\Code\Views\" />
+    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\zhou.Models\zhou.Models.csproj" />
+    <ProjectReference Include="..\zhou.Services\zhou.Services.csproj" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
-    <ProjectReference Include="..\zhou.Models\zhou.Models.csproj" />
-    <ProjectReference Include="..\zhou.Services\zhou.Services.csproj" />
+    <Folder Include="Areas\" />
   </ItemGroup>
 
 </Project>

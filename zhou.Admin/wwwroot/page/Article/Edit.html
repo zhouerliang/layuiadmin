@@ -1,0 +1,98 @@
+﻿<link href="../../js_zhou/highlight/styles/monokai-sublime.css" rel="stylesheet" />
+<div class="layuimini-container">
+    <div class="layuimini-main">
+        <form class="layui-form">
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">文章标题</label>
+                        <div class="layui-input-inline" style="width:400px;">
+                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">文章描述</label>
+                        <div class="layui-input-inline" style="width:400px;">
+                            <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">标签</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked="">
+                            <input type="checkbox" name="like1[read]" lay-skin="primary" title="阅读">
+                            <input type="checkbox" name="like1[game]" lay-skin="primary" title="游戏">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">分类</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked="">
+                            <input type="checkbox" name="like1[read]" lay-skin="primary" title="阅读">
+                            <input type="checkbox" name="like1[game]" lay-skin="primary" title="游戏">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    上传图片
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md9">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">内容</label>
+                        <div class="layui-input-block">
+                            <div id="editor" style="margin: 50px 0 50px 0">
+                                <pre><code>&lt;script&gt;<br>    layui.use(['form'], function () {<br>        var form = layui.form;<br>        var layer = layui.layer;<br><br>        /**<br>         * 初始化表单，要加上，不然刷新部分组件可能会不加载<br>         */<br>        form.render();<br>        //监听提交<br>        form.on('submit(setting)', function (data) {<br>            parent.layer.alert(JSON.stringify(data.field), {<br>                title: '最终的提交信息'<br>            });<br>            return false;<br>        });<br>    });<br>&lt;/script&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit="" lay-filter="btn_send">保存</button>
+                            <button class="layui-btn" lay-submit="" lay-filter="btn_send">获取内容</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md12">
+                    <div id="content"></div>
+                </div>
+            </div>
+            <div class="layui-row" id="text">
+                <div class="layui-col-md12">
+                    <pre><code>&lt;script&gt;<br>    hljs.initHighlightingOnLoad();<br>    layui.use(['form', 'wangEditor'], function () {<br>        var form = layui.form,<br>            wangEditor = layui.wangEditor;<br><br>        var editor = new wangEditor('#editor');<br>        editor.create();<br>        /*监听提交*/<br>        form.on('submit(btn_send)', function (data) {<br>            console.log(data.field);<br>            console.log(editor.txt.html());<br><br>            $("#content").html(editor.txt.html());<br>            $('#content pre code').each(function (i, block) {<br>                hljs.highlightBlock(block);<br>            });<br>            return false;<br>        });<br><br>    });<br>&lt;/script&gt;</code></pre>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="../../js_zhou/highlight/highlight.pack.js"></script>
+<script>
+    $('#content pre code,#text pre code').each(function (i, block) {
+        console.log(block);
+        hljs.highlightBlock(block);
+    });
+    layui.use(['form', 'wangEditor'], function () {
+        var form = layui.form,
+            wangEditor = layui.wangEditor;
+
+        var editor = new wangEditor('#editor');
+        editor.create();
+
+
+        //监听提交
+        form.on('submit(btn_send)', function (data) {
+            console.log(editor.txt.html());
+            $("#content").html(editor.txt.html());
+            $("#content pre code").addClass("javascript");
+            $('#content pre code').each(function (i, block) {
+                console.log(block);
+                hljs.highlightBlock(block);
+            });
+            return false;
+        });
+
+    });
+</script>
